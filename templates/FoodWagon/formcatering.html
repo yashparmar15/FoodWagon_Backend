@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.png' %}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'CSS/formcatering.css' %}">
+    <!-- <link rel="stylesheet" href="CSS/bootstarp.min.css"> -->
+    <title>Chef Registration</title>
+    <link rel="stylesheet" href="{% static 'CSS/floating-wpp.css' %}">
+    <link rel="stylesheet" href="{% static 'CSS/floating-wpp.min.css' %}">
+    <style>
+        .no-js #loader { display: none;  }
+        .js #loader { display: block; position: absolute; left: 100px; top: 0; }
+        .se-pre-con {
+            position: fixed;
+            left: 0px;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            background: url("{% static './img/Preloader_2.gif' %}") center no-repeat #fff;
+        }
+        </style>
+        <script src="{% static './JS/forpre1.js' %}"></script>
+            <script src="{% static './JS/forpre2.js' %}"></script>
+        <script>
+            $(window).load(function() {
+                $(".se-pre-con").fadeOut("slow");;
+            });
+        </script>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"  crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+    </head>
+    <body>
+        <div id="myButton" style="z-index: 100000;"></div>
+        <div class="se-pre-con"></div>
+        <div class="container">
+        <div class="text-center pb-3 mt-5">
+        <a href="/"><img src="{% static 'img/FoodWagon.PNG' %}" height="40" width=""></a>
+        </div>
+        <form id="contact" action="" method="post">
+        <h3>Chef Registration</h3>
+        <h4>Homemade Food For Everyone</h4>      
+        <fieldset>
+            <label>I am A...<span>*</span></label><br>
+            <input type="checkbox" tabindex="2" required="" value="1" name="" checked> Home Chef <br>
+            <input type="checkbox" tabindex="2" required="" value="2" name=""> Professional Chef <br>
+            <input type="checkbox" tabindex="2" required="" value="3" name=""> Mess <br>
+        </fieldset>
+        <fieldset>
+            <label>Full Name<span>*</span></label>
+            <input placeholder="Full Name" type="text" name="full_name" value="" tabindex="2" required="">
+        </fieldset>
+        <fieldset>
+            <label>Mobile Number<span>*</span></label>
+            <input placeholder="Your Mobile Number" type="tel" name="mobile_number" id="mobile_number" value="" tabindex="3" required="">
+        </fieldset>
+        <fieldset>
+            <label>Email</label>
+            <input placeholder="Your Email Address" type="email" name="email" value="" tabindex="2">
+        </fieldset>
+        <fieldset>
+            <label>Stipend (per day)</label>
+            <input placeholder="Stipend" type="text" name="stipend" value="" tabindex="2">
+        </fieldset>
+        <fieldset>
+            <label>State<span>*</span></label>
+            <select name="state_id" id="state_id">
+            <option value="">Select a State</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <label>City<span>*</span></label>
+            <select name="city_id" id="city_id" on>
+            <option value="">Select a City</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <label>Area<span>*</span></label>
+            <input placeholder="Your Area" type="text" name="area" tabindex="4" required="">
+        </fieldset>
+        <fieldset>
+            <label>Address<span>*</span></label>
+            <textarea placeholder="Type your Address" name="address" tabindex="5" required=""></textarea>
+        </fieldset>
+        <fieldset>
+            <label>I specialise in these Cusine(s)<span>*</span></label><br>
+            <input type="checkbox" tabindex="2" value="3" > North Indian <br>
+            <input type="checkbox" tabindex="2" value="2" > South Indian <br>
+            <input type="checkbox" tabindex="2" value="4" > Gujarati <br>
+            <input type="checkbox" tabindex="2" value="1" > Punjabi <br>
+            <input type="checkbox" tabindex="2" value="5" > Rajasthani <br>
+            <input type="checkbox" tabindex="2" value="6" > Continental <br>
+            <input type="checkbox" tabindex="2" value="7" > Bengali <br>
+            <input type="checkbox" tabindex="2" value="8" > Marathi <br>
+            <input type="checkbox" tabindex="2" value="9" > Jain Food <br>
+            <input type="checkbox" tabindex="2" value="10"> Bakery <br>
+            <input type="checkbox" tabindex="2" value="11"> Other <br>
+        </fieldset>
+        <fieldset>
+            <label>Bussiness type<span>*</span></label><br>
+            <input type="radio" tabindex="2" required="" value="Individual" name="work_type" checked> Individual <br>
+            <input type="radio" tabindex="2" required="" value="Restaurant" name="work_type"> Professional <br>
+        </fieldset>
+        <fieldset>
+            <label>Expert in<span>*</span></label><br>
+            <input type="radio" tabindex="2" required="" value="1" name="food_type_id" checked> Vegetarian <br>
+            <input type="radio" tabindex="2" required="" value="2" name="food_type_id"> Non Vegetarian <br>
+        </fieldset>
+        <fieldset>
+            <label>Do you Have Food License<span>*</span></label><br>
+            <input type="radio" tabindex="2" required="" value="1" name="is_license"> Yes <br>
+            <input type="radio" tabindex="2" required="" value="0" name="is_license" checked> No <br>
+        </fieldset>      
+        <fieldset>
+            <input placeholder="device type" type="hidden" name="device_type" tabindex="4" value="web">
+            <input placeholder="os version" type="hidden" name="os_version" tabindex="4" value="1">
+            <input placeholder="apns id" type="hidden" name="apns_id" tabindex="4" value="s1df3454">
+            <input placeholder="notification id" type="hidden" name="notification_id" value="s1df3454" tabindex="4">
+            <input placeholder="plan id" type="hidden" name="plan_id" value="1" tabindex="4">
+            <input placeholder="transaction details" type="hidden" name="transaction_details" id="transaction_details" value="" tabindex="4">
+            <input type="hidden" tabindex="2" value="online" name="payment_mode">
+            <input type="hidden" tabindex="2" value="0" name="paid_status" id="paid_status">
+            <input type="hidden" tabindex="2" value="" name="logID" id="logID">
+            <input type="hidden" tabindex="2" value="0" name="test_status" id="test_status">
+        </fieldset>
+        <fieldset>
+            <label>No. of Customer Base</label>
+            <input placeholder="No. of Customer Base" type="text" name="customer_strength" value="" tabindex="2">
+        </fieldset>
+        <fieldset>
+            <label>Employee Id</label>
+            <input placeholder="Employee Id" type="text" name="employee_id" value="" tabindex="2">
+        </fieldset>
+        <div class="file-field">
+            <div class="btn btn-primary btn-sm ">
+              <span>Choose file</span>
+              <input type="file">
+            </div>
+            <div class="file-path-wrapper">
+              <input class="file-path validate" type="text" placeholder="Upload your Photo" readonly>
+            </div>
+        </div>
+        <fieldset> 
+            <input type="checkbox" tabindex="2" value="1" name="terms" id="termsandcond" disabled> I agree to the <a href="javascript:void();" class="openpopup" data-toggle="modal" data-target=".bd-example-modal-lg">terms of service</a>
+        </fieldset>
+        <fieldset>        
+            <button name="next" type="submit" data-submit="...Sending" id="submitBtn" class="" disabled>Next</button>
+            <a href="/catering" class="text-center btn-block btn-sm btn-primary" id="backBtn" disabled="">&lt;&lt; Go back</a>
+        </fieldset>
+        <p class="copyright"><a href="/" target="_blank" title="Fatfood">FoodWagon Pvt. Ltd</a> Copyright © 2020 All Rights Reserved</p>
+        </form>
+        
+    </div>
+    <script>
+            $(function () {
+                $('#myButton').floatingWhatsApp({
+                    phone: '917000311028',
+                    popupMessage: 'Hello, how can we help you?',
+                    message: "I'd like to order a pizza",
+                    showPopup: true,
+                    showOnIE: false,
+                    headerTitle: 'Welcome to FoodWagon!',
+                    headerColor: '#4FCE5D',
+                    backgroundColor: '#4FCE5D',
+                    buttonImage: '<img src="{% static 'img/whatsapp.svg' %}" />'
+                });
+            });
+        </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <!-- Third party plugin JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{% static 'JS/floating-wpp.js' %}"></script>
+    
+    </body>
+</html>
