@@ -107,6 +107,42 @@
 </style>
 </head>
 <body>
+  <a href="" class="btn btn-secondary fixed-bottom toformcatering" data-toggle="modal" data-target="#addvenue">Add Venue</a>
+
+<!-- Modal -->
+<div class="modal fade" id="addvenue" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Wanna Add Your Venue</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <b>If you want to add your own venue then click on "Add" Button and send us the following details via mail :-</b> 
+        <ol>
+          <li>Your Name</li>
+          <li>Venue Name</li>
+          <li>Venue Address</li>
+          <li>City</li>
+          <li>Your Phone Number</li>
+          <li>Alternative Phone Number</li>
+          <li>Your Email Id</li>
+          <li>Price per Day</li>
+          <li>Maximum Guests</li>
+          <li>Some Photos of Your Venue</li>
+          <li>Are you owner of the place ?</li>
+        </ol>
+        <b>Our Executive will contact you soon for further information<br>Thank You</b>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <a href="mailto:yashparmar15700@gmail.com"  class="btn btn-primary">Add</a>
+      </div>
+    </div>
+  </div>
+</div>
     <div id="myButton" style="z-index: 100000;"></div>
     <div class="se-pre-con"></div>
     <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3 navbar-fixed-top" id="mainNav" style="z-index: 1000;">
@@ -184,70 +220,23 @@
 <!-- Portfolio Gallery Grid -->
 <div class="container">
   <div class="row justify-content-center">
+    {% if venue_records %}
+      {% for venue in venue_records %}
       <div class="card text-center" style="width: 18rem; " >
         
-          <img class="card-img-top" src="{% static 'img/venue/1.jpg' %}" alt="Card image cap" >
+          {% if venue.image1 %}<img class="card-img-top" src={{venue.image1.url}} alt="Card image cap" >{% endif%}
           <div class="card-body">
-            <h5 class="card-title">Wedding Place</h5>
-            <p class="card-text">City: Random.
-              Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <h5 class="card-title">{{venue.Venue_Name}}</h5>
+            <p class="card-text"><b>{{venue.City}}</b><br>
+              {{venue.Address}}</p>
             <a href="#" class="productViewBtn btn btn-primary">View Place</a>
           </div>
           
       </div>
-      <div class="card text-center" style="width: 18rem; " >
-        <img class="card-img-top" src="{% static 'img/venue/1.jpg' %}" alt="Card image cap" >
-        <div class="card-body">
-          <h5 class="card-title">Wedding Place</h5>
-          <p class="card-text">City: Random.
-            Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" class="productViewBtn btn btn-primary" data-toggle="modal" data-target="#exampleModal">View Place</a>
-        </div>
-      </div>
-      <div class="card text-center" style="width: 18rem; " >
-        <img class="card-img-top" src="{% static 'img/venue/1.jpg' %}" alt="Card image cap" >
-        <div class="card-body">
-          <h5 class="card-title">Wedding Place</h5>
-          <p class="card-text">City: Random.
-            Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" class="productViewBtn btn btn-primary" data-toggle="modal" data-target="#exampleModal">View Place</a>
-        </div>
-      </div>
-      <div class="card text-center" style="width: 18rem; " >
-        <img class="card-img-top" src="{% static 'img/venue/1.jpg' %}" alt="Card image cap" >
-        <div class="card-body">
-          <h5 class="card-title">Wedding Place</h5>
-          <p class="card-text">City: Random.
-            Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" class="productViewBtn btn btn-primary" data-toggle="modal" data-target="#exampleModal">View Place</a>
-        </div>
-      </div>
-      <div class="card text-center" style="width: 18rem; " >
-        <img class="card-img-top" src="{% static 'img/venue/1.jpg' %}" alt="Card image cap" >
-        <div class="card-body">
-          <h5 class="card-title">Wedding Place</h5>
-          <p class="card-text">City: Random.
-            Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" class="productViewBtn btn btn-primary" data-toggle="modal" data-target="#exampleModal">View Place</a>
-        </div>
-      </div>
-      <div class="card text-center" style="width: 18rem; " >
-        <img class="card-img-top" src="{% static 'img/venue/1.jpg' %}" alt="Card image cap" >
-        <div class="card-body">
-          <h5 class="card-title">Wedding Place</h5>
-          <p class="card-text">City: Random.
-            Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" class="productViewBtn btn btn-primary" data-toggle="modal" data-target="#exampleModal">View Place</a>
-        </div>
-       </div>
-       <div class="card text-center" style="width: 18rem; " >
-        <img class="card-img-top" src="{% static 'img/venue/1.jpg' %}" alt="Card image cap" >
-        <div class="card-body">
-          <h5 class="card-title">Wedding Place</h5>
-          <p class="card-text">City: Random.
-            Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" class="productViewBtn btn btn-primary" data-toggle="modal" data-target="#exampleModal">View Place</a>
-        </div>
+      {% endfor %}
+      {% else %}
+      <h1>No Venues to Display.</h1>
+    {% endif %}
       </div>
   </div>
   

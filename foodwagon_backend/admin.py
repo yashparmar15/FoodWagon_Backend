@@ -1,3 +1,7 @@
 from django.contrib import admin
 
-# Register your models here.
+from foodwagon_backend.models import Venues
+from .models import Venues
+
+admin.site.register(Venues)
+
