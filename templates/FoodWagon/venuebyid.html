@@ -104,45 +104,41 @@
   background-color: #666;
   color: white;
 }
+.slide{
+    width:60vw;
+    margin-left:20vw;
+}
+@media only screen and (max-width:992px){
+  .slide{
+    width:100vw;
+    margin-left:0vw;
+}
+.b{
+    width:100vw !important;
+    margin-left:0vw !important;
+    margin-bottom:20px;
+}
+    
+}
+.p{
+    font-size:20px;
+    
+}
+.b{
+    background-color:grey;
+    width:60vw;
+    margin-left:20vw;
+    margin-bottom:20px;
+}
+.butt{
+    color:white;
+    font-weight:bolder;
+}
 </style>
 </head>
 <body>
-  <a href="" class="btn btn-secondary fixed-bottom toformcatering" data-toggle="modal" data-target="#addvenue">Add Venue</a>
+  
 
-<!-- Modal -->
-<div class="modal fade" id="addvenue" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Wanna Add Your Venue</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <b>If you want to add your own venue then click on "Add" Button and send us the following details via mail :-</b> 
-        <ol>
-          <li>Your Name</li>
-          <li>Venue Name</li>
-          <li>Venue Address</li>
-          <li>City</li>
-          <li>Your Phone Number</li>
-          <li>Alternative Phone Number</li>
-          <li>Your Email Id</li>
-          <li>Price per Day</li>
-          <li>Maximum Guests</li>
-          <li>Some Photos of Your Venue</li>
-          <li>Are you owner of the place ?</li>
-        </ol>
-        <b>Our Executive will contact you soon for further information<br>Thank You</b>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <a href="mailto:yashparmar15700@gmail.com"  class="btn btn-primary">Add</a>
-      </div>
-    </div>
-  </div>
-</div>
     <div id="myButton" style="z-index: 100000;"></div>
     <div class="se-pre-con"></div>
     <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3 navbar-fixed-top" id="mainNav" style="z-index: 1000;">
@@ -181,142 +177,69 @@
     </nav>
 
 
+<h1 class="text-center" style="margin-top:100px;margin-bottom:50px;">{{venue.Venue_Name}}</h1>
+<div class="b text-center" >
+    <p class="p" style="padding-top:30px !important;"><b>City :</b>  {{venue.City}} </p>
+    <p class="p"><b>Address :</b> {{venue.Address}}</p>
+    <p class="p"><b>Maximum Guest :</b> {{venue.Maximum_Guest}}</p>
+    <p class="p"><b>Price per Day :</b> {{venue.Price_per_Day}}</p>
+    <p class="p"><b>Phone No. :</b> {{venue.Phone}}</p>
+    <button class="btn btn-success butt" style="margin-bottom:30px">Add to Cart</button>
+    <button class="btn btn-success butt" style="margin-bottom:30px">Book Now</button>
+    </div>
+<div id="carouselExampleIndicators" class="carousel slide text-center" data-ride="carousel">
     
-    <br><br><br>
-
-    <div class="parallax-container" style="height: 400px;">
-
-      <div class="col-lg-12 text-center">
-          <h1 class="text-white font-weight-bold" style="padding-top: 100px;">Venue</h1>
-          
-          <ol class="breadcrumb">
-              <li>
-                  <a href="/" >Home</a>
-              </li>
-              <li>Venue</li>
-          </ol>
-      </div>
-
-
-
-      <div class="parallax"  ><img src="{% static 'img/foodtruck/img1.png' %}" class="responsive-img" style="filter: brightness(30%);" ></div>
+  <ol class="carousel-indicators">
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+  </ol>
+  <div class="carousel-inner text-center">
+    {%if venue.image1 %}
+    <div class="carousel-item active">
+      <img class="d-block w-100" src={{venue.image1.url}} alt="First slide">
     </div>
-
-<!-- MAIN (Center website) -->
-<div class="main">
-
-<!-- <h1>Venues</h1> -->
-<hr>
-
-<!-- <h2>PORTFOLIO</h2> -->
-
-<div id="myBtnContainer" class="text-center">
-  <button class="btn filter active" onclick="filterSelection('all')"> Show all</button>
-  <button class="btn filter" onclick="filterSelection('wedding')"> Wedding</button>
-  <button class="btn filter"  onclick="filterSelection('birthdays')">Birthdays </button>
-  <button class="btn filter" onclick="filterSelection('office-party')"> office-party</button>
-</div>
-
-<!-- Portfolio Gallery Grid -->
-<div class="container">
-  <div class="row justify-content-center">
-    {% if venues %}
-      {% for venue in venues %}
-      <div class="card text-center" style="width: 18rem; " >
-        
-          {% if venue.image1 %}<img class="card-img-top" src={{venue.image1.url}} alt="Card image cap" style="width:300px;height:200px;">{% endif%}
-          <div class="card-body">
-            <h5 class="card-title">{{venue.Venue_Name}}</h5>
-            <p class="card-text"><b>City : {{venue.City}}</b><br>
-              {{venue.Address}}</p>
-            <a href="/venue/{{venue.id}}" class=" btn btn-primary">View Place</a>
-          </div>
-          
-      </div>
-      {% endfor %}
-      
-      {% else %}
-      <h1 style="margin-top:50px;">No Venues to Display.</h1>
-      
     {% endif %}
-      
-  </div>
-  
-</div>
-{% comment %} <div class="productViewBox" id = "">
-    <br><br><br><br>
-    <h3>{{venue.Venue_Name}}</h3>
-    <div class="productViewBox-closeBtn"><i class="fas fa-times"></i></div>
-    <div class="productViewBoxImg">
-        <img src={{venue.image1.url}}>
+    {%if venue.image2 %}
+     <div class="carousel-item">
+      <img class="d-block w-100" src={{venue.image2.url}} alt="Second slide">
     </div>
-    <div class="productViewBoxDetail">
-        <h5><b>Maximum No of Guests : </b>{{venue.Maximum_Guest}}</h5>
-        <h5><b>Price Per Day : </b> Rs {{venue.Price_per_Day}}</h5>
-        <h5><b>Address : </b> {{venue.address}} </h5>
-        <a href="#" class="addtocart"><i class="fas fa-heart"></i> Add to Cart</a>
-        <a href="#" class="writereview"><i class="fas fa-pen"></i> Write a review</a>
-        <a href="#" class="buynow"><i class="fas fa-shopping-cart"></i> Buy Now</a>
+    {% endif %}
+    {%if venue.image3 %}
+    <div class="carousel-item">
+      <img class="d-block w-100" src={{venue.image3.url}} alt="Third slide">
     </div>
-</div>  {% endcomment %}
-  
-
-    <script>
-        filterSelection("all")
-        function filterSelection(c) {
-          var x, i;
-          x = document.getElementsByClassName("column");
-          if (c == "all") c = "";
-          for (i = 0; i < x.length; i++) {
-            w3RemoveClass(x[i], "show");
-            if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
-          }
-        }
-        
-        function w3AddClass(element, name) {
-          var i, arr1, arr2;
-          arr1 = element.className.split(" ");
-          arr2 = name.split(" ");
-          for (i = 0; i < arr2.length; i++) {
-            if (arr1.indexOf(arr2[i]) == -1) {element.className += " " + arr2[i];}
-          }
-        }
-        
-        function w3RemoveClass(element, name) {
-          var i, arr1, arr2;
-          arr1 = element.className.split(" ");
-          arr2 = name.split(" ");
-          for (i = 0; i < arr2.length; i++) {
-            while (arr1.indexOf(arr2[i]) > -1) {
-              arr1.splice(arr1.indexOf(arr2[i]), 1);     
-            }
-          }
-          element.className = arr1.join(" ");
-        }
-        
-        
-        // Add active class to the current button (highlight it)
-        var btnContainer = document.getElementById("myBtnContainer");
-        var btns = btnContainer.getElementsByClassName("btn");
-        for (var i = 0; i < btns.length; i++) {
-          btns[i].addEventListener("click", function(){
-            var current = document.getElementsByClassName("active");
-            current[0].className = current[0].className.replace(" active", "");
-            this.className += " active";
-          });
-        }
-        </script>
-</div>
-</div>
-</div>
-</div>
-
-
-
-<div class="parallax-container" style="height: 400px;">
-
-    <div class="parallax"  ><img src="{% static 'img/foodtruck/img11.jpg' %}" class="responsive-img" style="filter: brightness(50%);" ></div>
+    {% endif %}
+    {%if venue.image4 %}
+    <div class="carousel-item">
+      <img class="d-block w-100" src={{venue.image4.url}} alt="Third slide">
+    </div>
+    {% endif %}
+    {%if venue.image5 %}
+    <div class="carousel-item">
+      <img class="d-block w-100" src={{venue.image5.url}} alt="Third slide">
+    </div> 
+    {% endif %}
   </div>
+ 
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+
+
+
+
+
+
+
 
 
 
@@ -327,7 +250,7 @@
 <div class="col" style="display: inline-block;overflow: hidden;">
     <div class="container">
         <br><br>
-        <h1 class="text-center font-weight-bold">A Word from our Happy Customers</h1>
+        <h2 class="text-center">A Word from our Happy Customers</h2>
         <hr width="200" style="border-top:2px solid mediumblue">
         <button class="waves-effect  waves-light btn btn-outline-dark" id="slideback" type="button"><i class="fas fa-arrow-left slideback"></i></button>
         <button class="waves-effect  waves-light btn btn-outline-dark" id="slide" type="button" style= "float: right;"><i class="fas fa-arrow-right slideback"></i></button>
@@ -498,51 +421,8 @@
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 
 
-<script>
-filterSelection("all")
-function filterSelection(c) {
-  var x, i;
-  x = document.getElementsByClassName("column");
-  if (c == "all") c = "";
-  for (i = 0; i < x.length; i++) {
-    w3RemoveClass(x[i], "show");
-    if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
-  }
-}
-
-function w3AddClass(element, name) {
-  var i, arr1, arr2;
-  arr1 = element.className.split(" ");
-  arr2 = name.split(" ");
-  for (i = 0; i < arr2.length; i++) {
-    if (arr1.indexOf(arr2[i]) == -1) {element.className += " " + arr2[i];}
-  }
-}
-
-function w3RemoveClass(element, name) {
-  var i, arr1, arr2;
-  arr1 = element.className.split(" ");
-  arr2 = name.split(" ");
-  for (i = 0; i < arr2.length; i++) {
-    while (arr1.indexOf(arr2[i]) > -1) {
-      arr1.splice(arr1.indexOf(arr2[i]), 1);     
-    }
-  }
-  element.className = arr1.join(" ");
-}
 
 
-// Add active class to the current button (highlight it)
-var btnContainer = document.getElementById("myBtnContainer");
-var btns = btnContainer.getElementsByClassName("btn");
-for (var i = 0; i < btns.length; i++) {
-  btns[i].addEventListener("click", function(){
-    var current = document.getElementsByClassName("active");
-    current[0].className = current[0].className.replace(" active", "");
-    this.className += " active";
-  });
-}
-</script>
 <script>
             $(function () {
                 $('#myButton').floatingWhatsApp({
