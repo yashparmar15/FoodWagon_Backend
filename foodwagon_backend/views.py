@@ -47,8 +47,18 @@ def venue(request):
 
 
 def foodtruck(request):
-    truck_list = Trucks.objects.order_by()
-    truck_dict = {'trucks':truck_list}
+    truck_list = Trucks.objects.all()
+    paginator = Paginator(truck_list, 3) 
+    page = request.GET.get('page')
+    try:
+        trucks = paginator.page(page)
+    except PageNotAnInteger:
+        trucks = paginator.page(1)
+    except EmptyPage:
+        trucks = paginator.page(paginator.num_pages)
+    truck_dict = {
+        'trucks':trucks,
+    }
     return render(request,'FoodWagon/foodtruck.html',context = truck_dict)
 
 def login(request):
