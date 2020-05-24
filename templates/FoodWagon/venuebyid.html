@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catering</title>
+    <title>Venue</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.png' %}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -182,7 +182,7 @@
     <p class="p" style="padding-top:30px !important;"><b>City :</b>  {{venue.City}} </p>
     <p class="p"><b>Address :</b> {{venue.Address}}</p>
     <p class="p"><b>Maximum Guest :</b> {{venue.Maximum_Guest}}</p>
-    <p class="p"><b>Price per Day :</b> {{venue.Price_per_Day}}</p>
+    <p class="p"><b>Price per Day :</b> Rs. {{venue.Price_per_Day}}</p>
     <p class="p"><b>Phone No. :</b> {{venue.Phone}}</p>
     <button class="btn btn-success butt" style="margin-bottom:30px">Add to Cart</button>
     <button class="btn btn-success butt" style="margin-bottom:30px">Book Now</button>
@@ -191,10 +191,18 @@
     
   <ol class="carousel-indicators">
     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    {%if venue.image2%}
     <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    {%endif%}
+    {%if venue.image3%}
     <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    {%endif%}
+    {%if venue.image4%}
     <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+    {%endif%}
+    {%if venue.image5%}
     <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+    {%endif%}
   </ol>
   <div class="carousel-inner text-center">
     {%if venue.image1 %}
@@ -223,7 +231,7 @@
     </div> 
     {% endif %}
   </div>
- 
+ {%if venue.image2%}
   <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="sr-only">Previous</span>
@@ -232,6 +240,7 @@
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a>
+  {%endif%}
 </div>
 
 

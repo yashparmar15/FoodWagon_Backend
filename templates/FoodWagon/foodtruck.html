@@ -37,6 +37,12 @@
             z-index: 9999;
             background: url("{% static './img/Preloader_2.gif' %}") center no-repeat #fff;
         }
+        .toformcatering{
+    margin: auto;
+    margin-bottom: 18px !important;
+    width:fit-content;
+}
+
         </style>
         
         <script src="{% static './JS/forpre1.js' %}"></script>
@@ -48,6 +54,7 @@
         </script>
 </head>
 <body >
+    
     <div id="myButton" style="z-index: 100000;"></div>
         <div class="se-pre-con"></div>
         <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3 navbar-fixed-top" id="mainNav" style="z-index: 1000;background-color: white;">
@@ -139,55 +146,30 @@
                 <h2 class="section-title section-title-border">Our Products</h2>
             </div>
             <!-- team member -->
-            
+            {%if trucks%}
+            {% for truck in trucks%}
             <div class="col-lg-4 col-sm-6 mb-4 mb-lg-0">
                 <div class="card text-center p-3">
                     
-                    <img  class="card-img-top rounded" src="{% static 'img/1.PNG' %}" alt="team member image">
+                    {% if truck.image1 %}<img  class="card-img-top rounded" src={{truck.image1.url}} alt="truck image">{%endif%}
                     <div class="card-body pb-0">
                         
-                        <h4 class="text-color">Standard Model</h4>
-                        <p class="card-text border-bottom pb-3">Lorem ipsum dolor amet consectur adipsicing elit sed eiusm tempor incididunt labore dolore magna aliqua enim minim.</p>
+                        <h4 class="text-color">{{truck.Model_Name}}</h4>
+                        <h5>Rs. {{truck.Price}}</h5>
+                        <p class="card-text border-bottom pb-3">{{truck.Description}}</p>
                         
-                              <button class="waves-effect  waves-light btn btn-outline-dark blue" style="background-color:rgb(137, 247, 186)  ;" type="button">ADD To CART</button>
+                              <a href = "/foodtruck/{{truck.id}}" class="waves-effect  waves-light btn btn-outline-dark blue" style="background-color:rgb(137, 247, 186)  ;" type="button">Check out and Book</a>
         
 
                         
                     </div>
                 </div>
             </div>
-            <!-- team member -->
-            <div class="col-lg-4 col-sm-6 mb-4 mb-lg-0">
-                <div class="card text-center p-3">
-                    <img  class="card-img-top rounded" src="{% static 'img/1.PNG' %}" alt="team member image">
-                    <div class="card-body pb-0">
-                        
-                        <h4 class="text-color">Premium Model</h4>
-                        <p class="card-text border-bottom pb-3">Lorem ipsum dolor amet consectur adipsicing elit sed eiusm tempor incididunt labore dolore magna aliqua enim minim.</p>
-                        
-                              <button class="waves-effect  waves-light btn btn-outline-dark blue" style="background-color:rgb(137, 247, 186)  ;" type="button">ADD To CART</button>
-        
-
-                        
-                    </div>
-                </div>
-            </div>
-            <!-- team member -->
-            <div class="col-lg-4 col-sm-6">
-                <div class="card text-center p-3">
-                    <img  class="card-img-top rounded" src="{% static 'img/1.PNG' %}" alt="team member image">
-                    <div class="card-body pb-0">
-                        
-                        <h4 class="text-color">Delux Model</h4>
-                        <p class="card-text border-bottom pb-3">Lorem ipsum dolor amet consectur adipsicing elit sed eiusm tempor incididunt labore dolore magna aliqua enim minim.</p>
-                        
-                              <button class="waves-effect  waves-light btn btn-outline-dark blue" style="background-color:rgb(137, 247, 186)  ;" type="button">ADD To CART</button>
-        
-
-                        
-                    </div>
-                </div>
-            </div>
+            {%endfor%}
+            {%else%}
+            <h1 style="margin-top:50px;margin-bottom:50px;"> No Trucks Found ! </h1>
+            {%endif%}
+            
             
         </div>
     </div>

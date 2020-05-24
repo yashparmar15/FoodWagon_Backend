@@ -31,4 +31,5 @@ urlpatterns = [
     path('register/',views.register),
     path('admin/', admin.site.urls),
     path('venue/<int:id>',views.venuebyid),
+    path('foodtruck/<int:id>',views.truckbyid),
 ]+ static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)
