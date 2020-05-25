@@ -143,6 +143,74 @@
     </div>
   </div>
 </div>
+    <a href="" class="btn btn-secondary fixed-top " data-toggle="modal" data-target="#venuefilter" style="margin-top: 100px !important; width: fit-content; margin-left: 20px; z-index: 1;">Add Filter</a>
+    <div class="modal fade" id="venuefilter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Filter</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <div class="card" >
+                        <article class="card-group-item">
+                            
+                            <div class="filter-content">
+                                <div class="card-body">
+                                <form action="/venue/" method="POST">
+                                    {% csrf_token %}
+                                    <header class="card-header">
+                                        <h6 class="title">Search By City </h6>
+                                    </header>
+                                    <label class="form-check">
+                                        <div class="col-auto my-1">
+                                            <select class="custom-select mr-sm-2" id="city" style="margin-top: 10px !important; margin-bottom: 10px !important;" name="city">
+                                              <option value="None">Search</option>
+                                              {% for venue in venues_list%}
+                                              <option value="{{venue.City}}">{{venue.City}}</option>
+                                              {%endfor%}
+                                              
+                                            </select>
+                                        </div>
+                                    </label>
+                                    <header class="card-header">
+                                        <h6 class="title">Sort By Price</h6>
+                                    </header>
+                                    
+                                        <label class="form-check">
+                                          <input class="form-check-input" type="radio" name="sort" value="lowtohigh" checked>
+                                            Low to High
+                                          </span>
+                                        </label>
+                                        <label class="form-check">
+                                          <input class="form-check-input" type="radio" name="sort" value="hightolow">
+                                          <span class="form-check-label">
+                                            High to Low
+                                          </span>
+                                        </label>
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                          <input  type="submit" class="btn btn-success" value="Save Changes">
+                                        </div>
+                                        
+                                        
+                                     
+                                </form>
+                    
+                                </div> <!-- card-body.// -->
+                            </div>
+                        </article> <!-- card-group-item.// -->
+                        
+                        
+                    </div>
+
+                </div>
+                
+              </div>
+            </div>
+          </div>
     <div id="myButton" style="z-index: 100000;"></div>
     <div class="se-pre-con"></div>
     <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3 navbar-fixed-top" id="mainNav" style="z-index: 1000;">

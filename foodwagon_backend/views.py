@@ -31,9 +31,31 @@ def restaurent(request):
     return render(request,'FoodWagon/restaurent.html')
 
 def venue(request):
+    if request.method == "POST":
+        print(request.POST['city'])
+        print(request.POST['sort'])
     venue_list = Venues.objects.all()
+    venue_lis = Venues.objects.all()
+    if request.method == "POST":
+        city = request.POST['city']
+        Sor = request.POST['sort']
+        if city != "None":
+            if Sor == "lowtohigh":
+                venue_list = Venues.objects.filter(City= city).order_by('Price_per_Day')
+            else:
+                venue_list = Venues.objects.filter(City= city).order_by('Price_per_Day').reverse()
+        else:
+            if Sor == "lowtohigh":
+                venue_list = Venues.objects.order_by('Price_per_Day')
+            else:
+                venue_list = Venues.objects.order_by('Price_per_Day').reverse()
+    else:
+        venue_list = Venues.objects.all()
     paginator = Paginator(venue_list, 3) 
-    page = request.GET.get('page')
+    if request.method == "POST":
+        page = request.POST.get('page')
+    else:
+        page = request.GET.get('page')
     try:
         venues = paginator.page(page)
     except PageNotAnInteger:
@@ -41,7 +63,7 @@ def venue(request):
     except EmptyPage:
         venues = paginator.page(paginator.num_pages)
     venue_dict = {
-        'venues':venues,
+        'venues':venues,'venues_list':venue_lis
     }
     return render(request,'FoodWagon/venue.html',context = venue_dict)
 
