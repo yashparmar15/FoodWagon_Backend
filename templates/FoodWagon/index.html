@@ -89,27 +89,30 @@
                 </div>
             </div>
         </nav>
-        <header class="masthead" id="home" style="background-color:black !important;background-image:url("{% static '/img/1.PNG' %}") !important">
+        <header class="masthead" id="home" style="background-color:black !important;background-repeat:no-repeat !important; background-size:cover !important;">
             <div class="container h-100 " >
                 <div class="row h-100 align-items-center justify-content-center text-center">
                     <div class="col-lg-10 align-self-end">
                         <h1 class="text-uppercase text-white font-weight-bold sha1">Global Platform for Local Food</h1>
-                        <form>
+                        <form action="/service/" method = "POST">
+                        {%csrf_token%}
                                 <div class="form-row row justify-content-center" style="padding-top: 20px !important; padding-bottom: 20px;">
                                     <div class="col-auto my-1">
-                                      <select class="custom-select mr-sm-2" id="selectcity" style="padding-left: 30px !important; padding-right: 30px !important;">
-                                        <option selected>Select Your City...</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                      <select class="custom-select mr-sm-2" id="selectcity" style="padding-left: 30px !important; padding-right: 30px !important;" name="city">
+                                        <option selected value="None">Select Your City...</option>
+                                        {% for venue in venuess%}
+                                        <option value="{{venue.City}}">{{venue.City}}</option>
+                                        {%endfor%}
+                                        
                                       </select>
                                     </div>
                                     <div class="col-auto my-1">
-                                        <select class="custom-select mr-sm-2" id="selectservice" style="padding-left: 30px !important; padding-right: 30px !important;">
-                                          <option selected>Select Service...</option>
-                                          <option value="1">One</option>
-                                          <option value="2">Two</option>
-                                          <option value="3">Three</option>
+                                        <select class="custom-select mr-sm-2" id="selectservice" style="padding-left: 30px !important; padding-right: 30px !important;" name="service">
+                                          <option selected value="None">Select Service...</option>
+                                          <option value="venue">Venue Booking</option>
+                                          <option value="catering">Catering</option>
+                                          <option value="foodtruck">Food Truck</option>
+                                          <option value="restaurent">Restaurant Outlet</option>
                                         </select>
                                       </div>
                                     <div class="col-auto my-1">

@@ -3,8 +3,8 @@ header.masthead {
     padding-top: 10rem;
     padding-bottom: calc(10rem - 4.5rem);
     background:  url("/static/img/background6.jpg") !important; 
-    background-position: center;
-    background-repeat: no-repeat;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
     background-attachment: scroll;
     background-size: cover;
   }

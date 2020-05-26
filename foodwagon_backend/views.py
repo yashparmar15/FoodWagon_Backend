@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 
 from django.http import HttpResponse
 from foodwagon_backend.models import Venues,Trucks
@@ -14,6 +14,32 @@ def truckbyid(request,id):
     truck_list = Trucks.objects.get(id = id)
     truck_dict = {'truck':truck_list}
     return render(request,'FoodWagon/truckbyid.html',context = truck_dict)
+
+def service(request):
+    if request.method == "POST":
+        city = request.POST['city']
+        service = request.POST['service']
+        if service == "None":
+            return render(request,'FoodWagon/index.html')
+        if service == "venue":
+            if city == "None":
+                venue_list = Venues.objects.all()
+                return render(request,'FoodWagon/venue.html',{'venues':venue_list})
+            venue_list = Venues.objects.filter(City = city)
+            return render(request,'FoodWagon/venue.html',{'venues':venue_list})
+        if service == "foodtruck":
+            truck_list = Trucks.objects.all()
+            return render(request,'FoodWagon/foodtruck.html',{'trucks':truck_list})
+        if service == "restaurent":
+            return render(request,'FoodWagon/restaurant.html')
+        return render(request,'FoodWagon/catering.html')
+    return redirect('/')
+        
+
+        
+
+
+
 
 
 def index(request):
@@ -31,7 +57,9 @@ def index(request):
             fail_silently= False
         )
         return render(request, 'FoodWagon/index.html', {'name' : first_name + " " + last_name})
-    return render(request,'FoodWagon/index.html')
+    venue_list = Venues.objects.all()
+    truck_list = Trucks.objects.all()
+    return render(request,'FoodWagon/index.html',{'venuess':venue_list , 'truckss' : truck_list})
 
 def adminlogin(request):
     return render(request,'FoodWagon/adminlogin.html')
