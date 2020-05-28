@@ -107,59 +107,28 @@
 
 
 
-        <h1 class="chef-heading">Top Chefs</h1>
+        <h1 class="chef-heading">Our Chefs</h1>
         <a href="" class="btn btn-secondary fixed-top " data-toggle="modal" data-target="#filter" style="margin-top: 100px !important; width: fit-content; margin-left: 20px; z-index: 1;">Add Filter</a>
         <div class="container">
             <div class="row justify-content-center">
+            {%if chefs %}
+              {% for chef in chefs %}
                 <div class="card text-center" style="width: 18rem; " >
-                    <img class="card-img-top" src="{% static 'img/1.png' %}" alt="Card image cap" >
+                   {%if chef.Image %} <img class="card-img-top mx-auto" src={{chef.Image.url}} alt="Card image cap" style="width:250px; height:250px"> {% endif %}
                     <div class="card-body">
-                      <h5 class="card-title">Example Example</h5>
-                      <p class="card-text">City: Random.
-                          Professional Chef. Specialise in Fast Food.Expert in Vegetarian</p>
-                      <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">More Details</a>
+                      <h5 class="card-title">{{chef.Name}}</h5>
+                      <p class="card-text"><b>City:</b> {{chef.City}} <br>
+                          <b>Price per Day :</b> {{chef.Stipend}}<br>
+                          <b>Specialise In :</b> | {% for item in chef.Speciality %} {%for i in item%}{{i}}{%endfor%} | {%endfor%}</p>
+
+                      <a href="/catering/{{chef.id}}" class="btn btn-primary" >More Details</a>
                       <a href="#" class="btn btn-success">Add to Cart</a>
                     </div>
                 </div>
-                <div class="card text-center" style="width: 18rem; " >
-                    <img class="card-img-top" src="{% static 'img/2.png' %}" alt="Card image cap" >
-                    <div class="card-body">
-                      <h5 class="card-title">Example Example</h5>
-                      <p class="card-text">City: Random.
-                          Professional Chef. Specialise in Fast Food.Expert in Vegetarian</p>
-                      <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">More Details</a>
-                      <a href="#" class="btn btn-success">Add to Cart</a>
-                    </div>
-                </div>
-                <div class="card text-center" style="width: 18rem; " >
-                    <img class="card-img-top" src="{% static 'img/3.png' %}" alt="Card image cap" >
-                    <div class="card-body">
-                      <h5 class="card-title">Example Example</h5>
-                      <p class="card-text">City: Random.<br></p>
-                      <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">More Details</a>
-                      <a href="#" class="btn btn-success">Add to Cart</a>
-                    </div>
-                </div>
-                <div class="card text-center" style="width: 18rem; " >
-                    <img class="card-img-top" src="{% static 'img/user.png' %}" alt="Card image cap" >
-                    <div class="card-body">
-                      <h5 class="card-title">Example Example</h5>
-                      <p class="card-text">City: Random.
-                          Professional Chef. Specialise in Fast Food.Expert in Vegetarian</p>
-                      <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">More Details</a>
-                      <a href="#" class="btn btn-success">Add to Cart</a>
-                    </div>
-                </div>
-                <div class="card text-center" style="width: 18rem; " >
-                    <img class="card-img-top" src="{% static 'img/user.png' %}" alt="Card image cap" >
-                    <div class="card-body">
-                      <h5 class="card-title">Example Example</h5>
-                      <p class="card-text">City: Random.
-                          Professional Chef. Specialise in Fast Food.Expert in Vegetarian</p>
-                      <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">More Details</a>
-                      <a href="#" class="btn btn-success">Add to Cart</a>
-                    </div>
-                </div>
+              {% endfor %}
+            {%else%}
+              <h1 style="margin-top:50px;margin-bottom:50px;">No Chef Found</h1>
+            {%endif%}
             </div>
             
         </div>

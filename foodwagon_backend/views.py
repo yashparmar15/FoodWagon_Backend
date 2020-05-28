@@ -1,10 +1,14 @@
 from django.shortcuts import render,redirect
 
 from django.http import HttpResponse
-from foodwagon_backend.models import Venues,Trucks
+from foodwagon_backend.models import Venues,Trucks,Chef
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.core.mail import send_mail
 
+def chefbyid(request,id):
+    chef_list = Chef.objects.get(id = id)
+    chef_dict = {'chef':chef_list}
+    return render(request,'FoodWagon/chefbyid.html',context = chef_dict)
 def venuebyid(request,id):
     venue_list = Venues.objects.get(id = id)
     venue_dict = {'venue':venue_list}
@@ -68,7 +72,32 @@ def chef(request):
     return render(request,'FoodWagon/formcatering.html')
 
 def catering(request):
-    return render(request,'FoodWagon/catering.html')
+    if request.method == 'POST':
+        work = request.POST.getlist('work[]')
+        name = request.POST['full_name']
+        mobile = request.POST['mobile_number']
+        email = request.POST['email']
+        stipend = request.POST['stipend']
+        country = request.POST['country']
+        state = request.POST['state']
+        city = request.POST['city']
+        area = request.POST['area']
+        address = request.POST['address']
+        spe = request.POST.getlist('special[]')
+        work_type = request.POST['work_type']
+        expert = request.POST['food_type_id']
+        lic = request.POST['is_license']
+        customer = request.POST['customer_strength']
+        employee = request.POST['employee_id']
+        image = request.POST['image']
+        if customer == '':
+            customer = 0
+        Data = Chef(Work_As = work , Name = name , Phone = mobile , Email = email , Stipend = stipend , Country = country , State = state , City = city , Area = area , Address = address , Speciality = spe , Type = work_type , ExpertIn = expert , License = lic , Base = customer , EmployeeID = employee , Image = image)
+        Data.save()
+        chefs = Chef.objects.all()
+        return render(request,'FoodWagon/catering.html',{'chefs':chefs})
+    chefs = Chef.objects.all()
+    return render(request,'FoodWagon/catering.html',{'chefs':chefs})
 
 def restaurent(request):
     if request.method == 'POST':

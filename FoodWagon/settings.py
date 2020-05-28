@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'foodwagon_backend'
+    'foodwagon_backend',
+    'django.forms'
 ]
 
 MIDDLEWARE = [
