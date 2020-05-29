@@ -155,12 +155,12 @@
   .w3l-forms-23 {
     padding: 2rem 0;
     align-items: center;
-    background:  url("../static/img/background6.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
+    background:  url("../img/background6.jpg") !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
     background-attachment: scroll;
-    background-size: cover;
-    background-size: cover;
+    background-size: cover !important;
+
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
