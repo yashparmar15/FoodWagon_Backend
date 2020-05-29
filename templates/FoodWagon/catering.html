@@ -67,7 +67,7 @@
                               <a class="dropdown-item" href="/foodtruck">Food Trucks</a>
                             </div>
                           </li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#cart"><i class="fa fa-shopping-cart"></i>  Cart</a></li>
+                        
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/#contact-section"><i class="fa fa-phone"></i>  Contact</a></li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle js-scroll-trigger" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -76,9 +76,16 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                               <a class="dropdown-item" href="/login">Sign In</a>
                               <a class="dropdown-item" href="/register">Register</a>
-                              <a class="dropdown-item" href="/adminlogin">Admin Login</a>
+                              <a class="dropdown-item" href="/admin">Admin Login</a>
                             </div>
                           </li>
+                          <form class="form-inline my-2 my-lg-0">
+               
+                                <a class="btn btn-success btn-sm ml-3" href="/cart">
+                                    <i class="fa fa-shopping-cart"></i> Cart
+                                    <span class="badge badge-light">3</span>
+                                </a>
+                            </form>
                     </ul>
                 </div>
             </div>
@@ -132,6 +139,51 @@
             </div>
             
         </div>
+        {% if chefs.has_other_pages %}
+          <div class="col-6 offset-3 text-center pagination-set">
+            <nav aria-label="">
+              <ul class="pagination justify-content-center">
+
+                {% if chefs.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page={{ chefs.previous_page_number }}"><i class="fa fa-chevron-left" aria-hidden="true"></i></a></li>
+                {% else %}
+                    <li class="page-item disabled">
+                      <a class="page-link"><span>&laquo;</span></a>
+                    </li>
+                {% endif %}
+                
+                {% if chefs.number|add:'-4' > 1 %}
+                    <li class="page-item"><a class="page-link" href="?page={{ chefs.number|add:'-5' }}">&hellip;</a></li>
+                {% endif %}
+                
+                {% for i in chefs.paginator.page_range %}
+                    {% if chefs.number == i %}
+                        <li class="page-item active">
+                          <a class="page-link" href="#">{{ i }} <span class="sr-only">(current)</span></a>
+                        </li>
+                    {% elif i > chefs.number|add:'-5' and i < chefs.number|add:'5' %}
+                        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                
+                {% if chefs.paginator.num_pages > chefs.number|add:'4' %}
+                    <li class="page-item"><a class="page-link" href="?page={{ chefs.number|add:'5' }}">&hellip;</a></li>
+                {% endif %}
+                
+                {% if chefs.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ chefs.next_page_number }}"><i class="fa fa-chevron-right" aria-hidden="true"></i></a></li>
+                {% else %}
+                    <li class="page-item disabled">
+                      <a class="page-link"><span>&raquo;</span></a>
+                    </li>
+                {% endif %}
+                
+                </ul>
+              </nav>
+            </div>
+              
+        {% endif %}
+
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">

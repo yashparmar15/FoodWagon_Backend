@@ -73,7 +73,7 @@
                               <a class="dropdown-item" href="/foodtruck">Food Trucks</a>
                             </div>
                           </li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#cart"><i class="fa fa-shopping-cart"></i>  Cart</a></li>
+                        
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact-section"><i class="fa fa-phone"></i>  Contact</a></li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle js-scroll-trigger" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -82,9 +82,16 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                               <a class="dropdown-item" href="/login">Sign In</a>
                               <a class="dropdown-item" href="/register">Register</a>
-                              <a class="dropdown-item" href="/adminlogin">Admin Login</a>
+                              <a class="dropdown-item" href="/admin">Admin Login</a>
                             </div>
                           </li>
+                          <form class="form-inline my-2 my-lg-0">
+               
+                                <a class="btn btn-success btn-sm ml-3" href="/cart">
+                                    <i class="fa fa-shopping-cart"></i> Cart
+                                    <span class="badge badge-light">3</span>
+                                </a>
+                            </form>
                     </ul>
                 </div>
             </div>
@@ -101,7 +108,7 @@
                                       <select class="custom-select mr-sm-2" id="selectcity" style="padding-left: 30px !important; padding-right: 30px !important;" name="city">
                                         <option selected value="None">Select Your City...</option>
                                         {% for venue in venuess%}
-                                        <option value="{{venue.City}}">{{venue.City}}</option>
+                                        <option value="{{venue.City}}">{{venue}}</option>
                                         {%endfor%}
                                         
                                       </select>

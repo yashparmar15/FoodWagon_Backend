@@ -34,4 +34,5 @@ urlpatterns = [
     path('foodtruck/<int:id>',views.truckbyid),
     path('service/',views.service),
     path('catering/<int:id>',views.chefbyid),
+    path('cart/',views.cart),
 ]+ static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)

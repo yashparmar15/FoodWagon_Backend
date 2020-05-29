@@ -231,7 +231,7 @@
                           <a class="dropdown-item" href="/foodtruck">Food Trucks</a>
                         </div>
                       </li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#cart"><i class="fa fa-shopping-cart"></i>  Cart</a></li>
+                    
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/#contact-section"><i class="fa fa-phone"></i>  Contact</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle js-scroll-trigger" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -240,9 +240,16 @@
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                           <a class="dropdown-item" href="/login">Sign In</a>
                           <a class="dropdown-item" href="/register">Register</a>
-                          <a class="dropdown-item" href="/adminlogin">Admin Login</a>
+                          <a class="dropdown-item" href="/admin">Admin Login</a>
                         </div>
                       </li>
+                      <form class="form-inline my-2 my-lg-0">
+               
+                                <a class="btn btn-success btn-sm ml-3" href="/cart">
+                                    <i class="fa fa-shopping-cart"></i> Cart
+                                    <span class="badge badge-light">3</span>
+                                </a>
+                            </form>
                 </ul>
             </div>
         </div>
@@ -311,7 +318,8 @@
   </div>
   
 </div>
-{% if venues.has_other_pages %}
+
+  {% if venues.has_other_pages %}
   <div class="col-6 offset-3 text-center pagination-set">
     <nav aria-label="">
       <ul class="pagination justify-content-center">
@@ -354,7 +362,8 @@
       </nav>
     </div>
       
-{% endif %}
+  {% endif %}
+
 {% comment %} <div class="productViewBox" id = "">
     <br><br><br><br>
     <h3>{{venue.Venue_Name}}</h3>
