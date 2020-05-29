@@ -62,8 +62,16 @@ def index(request):
         )
         return render(request, 'FoodWagon/index.html', {'name' : first_name + " " + last_name})
     venue_list = Venues.objects.all()
+    chef_list= Chef.objects.all()
+    list_of_cities=[]
+    for j in venue_list:
+        list_of_cities.append(j.City)
+    for j in chef_list:
+        list_of_cities.append(j.City)
+    list_of_cities = set(list_of_cities)
+    print(list_of_cities)
     truck_list = Trucks.objects.all()
-    return render(request,'FoodWagon/index.html',{'venuess':venue_list , 'truckss' : truck_list})
+    return render(request,'FoodWagon/index.html',{'venuess':list_of_cities , 'truckss' : truck_list})
 
 def adminlogin(request):
     return render(request,'FoodWagon/adminlogin.html')
@@ -94,9 +102,19 @@ def catering(request):
             customer = 0
         Data = Chef(Work_As = work , Name = name , Phone = mobile , Email = email , Stipend = stipend , Country = country , State = state , City = city , Area = area , Address = address , Speciality = spe , Type = work_type , ExpertIn = expert , License = lic , Base = customer , EmployeeID = employee , Image = image)
         Data.save()
-        chefs = Chef.objects.all()
-        return render(request,'FoodWagon/catering.html',{'chefs':chefs})
-    chefs = Chef.objects.all()
+        # chefs = Chef.objects.all()
+
+        # return render(request,'FoodWagon/catering.html',{'chefs':chefs})
+    chef_list = Chef.objects.all()
+    paginator = Paginator(chef_list, 3) 
+    page = request.GET.get('page')
+        # print(page)
+    try:
+        chefs = paginator.page(page)
+    except PageNotAnInteger:
+        chefs = paginator.page(1)
+    except EmptyPage:
+        chefs = paginator.page(paginator.num_pages)
     return render(request,'FoodWagon/catering.html',{'chefs':chefs})
 
 def restaurent(request):
@@ -117,8 +135,7 @@ def restaurent(request):
         return render(request, 'FoodWagon/restaurent.html', {'name' : first_name + " " + last_name})
     return render(request,'FoodWagon/restaurent.html')
 def venue(request):
-    venue_list = Venues.objects.all()
-    venue_lis = Venues.objects.all()
+    venue_list_distint_city= Venues.objects.values('City').distinct()
 
     if request.method == "POST":
         city = request.POST['city']
@@ -133,21 +150,31 @@ def venue(request):
                 venue_list = Venues.objects.order_by('Price_per_Day')
             else:
                 venue_list = Venues.objects.order_by('Price_per_Day').reverse()
-        print(venue_list)
+        paginator = Paginator(venue_list, len(venue_list)) 
+        page = request.GET.get('page')
+        # print(page)
+        try:
+            venues = paginator.page(page)
+        except PageNotAnInteger:
+            venues = paginator.page(1)
+        except EmptyPage:
+            venues = paginator.page(paginator.num_pages)
     else:
-        venue_list = Venues.objects.all()
-    print(venue_list)
-    paginator = Paginator(venue_list, 3) 
-    page = request.GET.get('page')
-    try:
-        venues = paginator.page(page)
-    except PageNotAnInteger:
-        venues = paginator.page(1)
-    except EmptyPage:
-        venues = paginator.page(paginator.num_pages)
+        venue_list=Venues.objects.all()
+        paginator = Paginator(venue_list, 3) 
+        page = request.GET.get('page')
+        # print(page)
+        try:
+            venues = paginator.page(page)
+        except PageNotAnInteger:
+            venues = paginator.page(1)
+        except EmptyPage:
+            venues = paginator.page(paginator.num_pages)
+
     venue_dict = {
-        'venues':venues,'venues_list':venue_lis
-    }
+            'venues':venues,'venues_list':venue_list_distint_city,
+        }
+
     return render(request,'FoodWagon/venue.html',context = venue_dict)
 
 
