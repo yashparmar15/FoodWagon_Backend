@@ -41,6 +41,12 @@
                 z-index: 9999;
                 background: url("{% static './img/Preloader_2.gif' %}") center no-repeat #fff;
             }
+
+            .hellotext{
+                display: flex;
+                justify-content: center;
+                color: white
+            }
             </style>
             
             <script src="{% static './JS/forpre1.js' %}"></script>
@@ -73,31 +79,39 @@
                               <a class="dropdown-item" href="/foodtruck">Food Trucks</a>
                             </div>
                           </li>
-                        
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#cart"><i class="fa fa-shopping-cart"></i>  Cart</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact-section"><i class="fa fa-phone"></i>  Contact</a></li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle js-scroll-trigger" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-sign-in"></i>  Login
+                                <i class="fa fa-sign-in"></i>
+                                {% if request.user.is_authenticated %}
+                                    Logout
+                                {% else %}
+                                Login
+                                {% endif %}
                             </a>
+
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                              <a class="dropdown-item" href="/login">Sign In</a>
+
+                              {% if request.user.is_authenticated %}
+                              <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                                {% else %}
+                                <a class="dropdown-item" href="/login">Sign In</a>
                               <a class="dropdown-item" href="/register">Register</a>
-                              <a class="dropdown-item" href="/admin">Admin Login</a>
+                              <a class="dropdown-item" href="/adminlogin">Admin Login</a>
+                               {% endif %}
                             </div>
                           </li>
-                          <form class="form-inline my-2 my-lg-0">
-               
-                                <a class="btn btn-success btn-sm ml-3" href="/cart">
-                                    <i class="fa fa-shopping-cart"></i> Cart
-                                    <span class="badge badge-light">3</span>
-                                </a>
-                            </form>
                     </ul>
                 </div>
             </div>
         </nav>
+
         <header class="masthead" id="home" style="background-color:black !important;background-repeat:no-repeat !important; background-size:cover !important;">
             <div class="container h-100 " >
+                   {% if request.user.is_authenticated %}
+                            <span class="hellotext"><h3>Hello, {{request.user.first_name}}!</h3></span>
+                            {% endif %}
                 <div class="row h-100 align-items-center justify-content-center text-center">
                     <div class="col-lg-10 align-self-end">
                         <h1 class="text-uppercase text-white font-weight-bold sha1">Global Platform for Local Food</h1>
@@ -108,7 +122,7 @@
                                       <select class="custom-select mr-sm-2" id="selectcity" style="padding-left: 30px !important; padding-right: 30px !important;" name="city">
                                         <option selected value="None">Select Your City...</option>
                                         {% for venue in venuess%}
-                                        <option value="{{venue.City}}">{{venue}}</option>
+                                        <option value="{{venue.City}}">{{venue.City}}</option>
                                         {%endfor%}
                                         
                                       </select>

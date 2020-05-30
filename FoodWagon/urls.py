@@ -20,19 +20,19 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls import include
 urlpatterns = [
-    path('', views.index),
+    path('', views.index, name="index"),
     path('adminlogin/', views.adminlogin),
     path('catering/',views.catering),
     path('restaurent/',views.restaurent),
     path('venue/',views.venue),
     path('foodtruck/',views.foodtruck),
     path('chef/',views.chef),
-    path('login/',views.login),
+    path('login/',views.loginPage, name="login"),
+    path('logout/',views.logoutUser, name="logout"),
     path('register/',views.register),
     path('admin/', admin.site.urls),
     path('venue/<int:id>',views.venuebyid),
     path('foodtruck/<int:id>',views.truckbyid),
     path('service/',views.service),
     path('catering/<int:id>',views.chefbyid),
-    path('cart/',views.cart),
 ]+ static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)

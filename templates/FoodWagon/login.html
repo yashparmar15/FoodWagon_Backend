@@ -36,7 +36,14 @@
             font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif !important;
             text-shadow: 5px 5px 20px red !important;
         }
-        
+        #messages{
+			background-color: grey;
+			color: #fff;
+			padding: 10px;
+			margin-top: 10px;
+
+		}
+
         </style>
         <script src="{% static './JS/forpre1.js' %}"></script>
             <script src="{% static './JS/forpre2.js' %}"></script>
@@ -58,11 +65,11 @@
 	<section class="w3l-forms-23">
 		<div class="forms23-block-hny">
 			<div class="wrapper">
-				
 
-		
+
+
 				<h1 style="margin-top: -10px;">Sign In to FoodWagon</h1>
-				
+
 <div class="display-ad" style="margin: 8px auto; display: block; text-align:center;">
 		</div>
 				<div class="d-grid forms23-grids">
@@ -70,19 +77,24 @@
 						<div class="main-bg">
 							<a href="/" class="toindex"><h6 class="sec-one"></h6></a>
 							<div class="speci-login first-look">
-								
+
 							</div>
 						</div>
 						<div class="bottom-content">
-							<form action="#" method="post">
-								<input type="email" name="email" class="input-form" placeholder="Your Email" id="smail"
-										required="required" />
+							<form method="POST" action="">
+								{% csrf_token %}
+								{% for message in messages %}
+									<p id="messages">{{message}}</p>
+								{% endfor %}
+								<input type="text" name="username" placeholder="Username..." class="input-form" id="spass">
 								<input type="password" name="password" class="input-form" id="spass"
-                                        placeholder="Your Password" required="required" />
+                                        placeholder="Your Password" />
                                 <a href="#">FORGET PASSWORD ?</a>
 								<button type="submit" class="loginhny-btn btn">Sign In</button>
+
+
+								<p>Not a member yet? <a href="/register">Join Now!</a></p>
 							</form>
-							<p>Not a member yet? <a href="/register">Join Now!</a></p>
 						</div>
 					</div>
 				</div>
